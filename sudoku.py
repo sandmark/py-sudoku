@@ -22,6 +22,7 @@ class Sudoku:
                 self._table[x][y] = serialized[x][y]
 
     def solve(self):
+        """tableの問題を解決する"""
         def solver(n, table):
             if n == 9 * 9:
                 raise SolvedException(table)
