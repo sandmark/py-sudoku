@@ -1,4 +1,5 @@
 import math
+import pprint
 
 
 class SolvedException(Exception):
@@ -13,6 +14,9 @@ class Sudoku:
 
     def __init__(self):
         self._table = [[0 for _ in range(9)] for _ in range(9)]
+
+    def __str__(self):
+        return pprint.pformat(self.table)
 
     def set_numbers(self, string):
         """tableに数値をセットする"""
