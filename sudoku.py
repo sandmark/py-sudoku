@@ -37,7 +37,7 @@ class Sudoku:
                     return solver(n + 1, table)
                 else:
                     for i in range(1, 10):
-                        if self.__is_valid(i, (x, y)):
+                        if self._is_valid(i, (x, y)):
                             table[x][y] = i
                             solver(n + 1, table)
                             table[x][y] = 0
@@ -47,28 +47,28 @@ class Sudoku:
         except SolvedException as e:
             self._table = e.args[0]
 
-    def __is_valid(self, n, pos):
+    def _is_valid(self, n, pos):
         """table[x,y]にnが矛盾なく配置できる場合は真を返す"""
-        row = self.__is_valid_row(n, pos[0])
-        col = self.__is_valid_col(n, pos[1])
-        box = self.__is_valid_box(n, pos)
+        row = self._is_valid_row(n, pos[0])
+        col = self._is_valid_col(n, pos[1])
+        box = self._is_valid_box(n, pos)
         return row and col and box
 
-    def __is_valid_row(self, n, x):
+    def _is_valid_row(self, n, x):
         """行にnが配置できる場合は真を返す"""
         for i in range(9):
             if self.table[x][i] == n:
                 return False
         return True
 
-    def __is_valid_col(self, n, y):
+    def _is_valid_col(self, n, y):
         """列にnが配置できる場合は真を返す"""
         for i in range(9):
             if self.table[i][y] == n:
                 return False
         return True
 
-    def __is_valid_box(self, n, pos):
+    def _is_valid_box(self, n, pos):
         """枠内にnが配置できる場合は真を返す"""
         x = (math.floor(pos[0] / 3) * 3)
         y = (math.floor(pos[1] / 3) * 3)
