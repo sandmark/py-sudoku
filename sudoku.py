@@ -81,3 +81,21 @@ class Sudoku:
     @property
     def table(self):
         return self._table
+
+
+def main():
+    print('問題を入力してください:')
+    string = ''
+    for _ in range(9):
+        print('> ', end='')
+        string += input() + '\n'
+
+    sudoku = Sudoku()
+    sudoku.set_numbers(string)
+    print('問題を解決しています...')
+    sudoku.solve()
+    print(sudoku)
+
+
+if __name__ == '__main__':
+    main()
