@@ -25,8 +25,23 @@ class TestSudoku:
               [7, 6, 8, 4, 3, 5, 1, 9, 2],
               [4, 3, 9, 1, 2, 7, 8, 6, 5]]
 
+    BOX_TEST = """040002010
+000830090
+600040800
+820000469
+050090080
+109000005
+380005006
+000760050
+510000040"""
+
     def setup(self):
         self.sudoku = Sudoku()
+
+    def test_is_valid_box(self):
+        """枠内で数値は重複しない"""
+        self.sudoku.set_numbers(self.BOX_TEST)
+        eq_(False, self.sudoku._is_valid_box(1, (2, 3)))
 
     def test_solve(self):
         """数独問題を解決する"""
