@@ -22,7 +22,7 @@ class Sudoku:
         serialized = [[int(i) for i in l] for l in string.split('\n')]
         for y in range(9):
             for x in range(9):
-                self._table[x][y] = serialized[x][y]
+                self._table[y][x] = serialized[y][x]
 
     def solve(self):
         """tableの問題を解決する"""
@@ -32,14 +32,14 @@ class Sudoku:
             else:
                 x = n // 9
                 y = n % 9
-                if table[x][y] != 0:
+                if table[y][x] != 0:
                     return solver(n + 1, table)
                 else:
                     for i in range(1, 10):
                         if self._is_valid(i, (x, y)):
-                            table[x][y] = i
+                            table[y][x] = i
                             solver(n + 1, table)
-                            table[x][y] = 0
+                            table[y][x] = 0
 
         try:
             solver(0, self.table[:])
@@ -47,7 +47,7 @@ class Sudoku:
             self._table = e.args[0]
 
     def _is_valid(self, n, pos):
-        """table[x,y]にnが矛盾なく配置できる場合は真を返す"""
+        """table[y][x]にnが矛盾なく配置できる場合は真を返す"""
         row = self._is_valid_row(n, pos[0])
         col = self._is_valid_col(n, pos[1])
         box = self._is_valid_box(n, pos)
@@ -56,14 +56,14 @@ class Sudoku:
     def _is_valid_row(self, n, x):
         """行にnが配置できる場合は真を返す"""
         for i in range(9):
-            if self.table[x][i] == n:
+            if self.table[i][x] == n:
                 return False
         return True
 
     def _is_valid_col(self, n, y):
         """列にnが配置できる場合は真を返す"""
         for i in range(9):
-            if self.table[i][y] == n:
+            if self.table[y][i] == n:
                 return False
         return True
 
@@ -73,7 +73,7 @@ class Sudoku:
         y = (pos[1] // 3) * 3
         for i in range(2):
             for j in range(2):
-                if self.table[x + i][y + j] == n:
+                if self.table[y + i][x + j] == n:
                     return False
         return True
 
