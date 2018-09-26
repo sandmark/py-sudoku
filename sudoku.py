@@ -1,4 +1,3 @@
-import math
 import pprint
 
 
@@ -31,7 +30,7 @@ class Sudoku:
             if n == 9 * 9:
                 raise SolvedException(table)
             else:
-                x = math.floor(n / 9)
+                x = n // 9
                 y = n % 9
                 if table[x][y] != 0:
                     return solver(n + 1, table)
@@ -70,8 +69,8 @@ class Sudoku:
 
     def _is_valid_box(self, n, pos):
         """枠内にnが配置できる場合は真を返す"""
-        x = (math.floor(pos[0] / 3) * 3)
-        y = (math.floor(pos[1] / 3) * 3)
+        x = (pos[0] // 3) * 3
+        y = (pos[1] // 3) * 3
         for i in range(2):
             for j in range(2):
                 if self.table[x + i][y + j] == n:
