@@ -71,8 +71,8 @@ class Sudoku:
         """枠内にnが配置できる場合は真を返す"""
         x = (pos[0] // 3) * 3
         y = (pos[1] // 3) * 3
-        for i in range(2):
-            for j in range(2):
+        for i in range(3):
+            for j in range(3):
                 if self.table[y + i][x + j] == n:
                     return False
         return True
