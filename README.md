@@ -22,10 +22,10 @@
 ## アルゴリズム
 [M.Hiroi's Home Page](mhiroi)で解説されていた例を参考にさせていただきました。この場を借りて感謝を申し上げます。
 
-## ToDo
-- 再帰から抜ける手段が`try ~ except`なのでなんとかしたい
-
 ## ChangeLog
+### 0.0.2
+メソッド`Sudoku.solve`をリファクタリング。
+
 ### 0.0.1
 Initial Release.
 
