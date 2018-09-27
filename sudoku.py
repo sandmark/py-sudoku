@@ -1,10 +1,6 @@
 import pprint
 
 
-class SolvedException(Exception):
-    pass
-
-
 class Sudoku:
     """数独の問題を持ち、解決を行う。
 
@@ -24,27 +20,23 @@ class Sudoku:
             for x in range(9):
                 self._table[y][x] = serialized[y][x]
 
-    def solve(self):
+    def solve(self, n=0):
         """tableの問題を解決する"""
-        def solver(n, table):
-            if n == 9 * 9:
-                raise SolvedException(table)
-            else:
-                x = n // 9
-                y = n % 9
-                if table[y][x] != 0:
-                    return solver(n + 1, table)
-                else:
-                    for i in range(1, 10):
-                        if self._is_valid(i, (x, y)):
-                            table[y][x] = i
-                            solver(n + 1, table)
-                            table[y][x] = 0
-
-        try:
-            solver(0, self.table[:])
-        except SolvedException as e:
-            self._table = e.args[0]
+        x = n // 9
+        y = n % 9
+        if n == 81:
+            return True
+        elif self.table[y][x] != 0:
+            if self.solve(n + 1):
+                return True
+        else:
+            for i in range(1, 10):
+                if self._is_valid(i, (x, y)):
+                    self._table[y][x] = i
+                    if self.solve(n + 1):
+                        return True
+            self._table[y][x] = 0
+            return False
 
     def _is_valid(self, n, pos):
         """table[y][x]にnが矛盾なく配置できる場合は真を返す"""
